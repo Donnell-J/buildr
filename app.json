@@ -12,8 +12,14 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/**/*.png",
+      "assets/**/*.jpg",
+      "assets/**/*.gltf",
+      "assets/**/*.glb"
     ],
+    "packagerOpts": {
+      "assetExts": ["png", "jpg", "gltf", "glb"]
+    },
     "ios": {
       "supportsTablet": true
     },
