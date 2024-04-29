@@ -15,7 +15,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
     "babel-preset-expo": "^10.0.2",
-    "crypto": "^1.0.1",
+    "crypto": "npm:crypto-browserify",
     "crypto-browserify": "^3.12.0",
     "expo": "~50.0.7",
     "expo-image-picker": "~14.7.1",
@@ -31,6 +31,7 @@
     "react-native-modal-dropdown": "^1.0.2",
     "react-native-reanimated": "^3.8.1",
     "react-native-web": "~0.19.6",
+    "stream": "npm:stream-browserify",
     "three-orbit-controls": "^82.1.0"
   },
   "devDependencies": {
@@ -38,6 +39,9 @@
     "@babel/core": "^7.24.4",
     "@babel/plugin-transform-modules-commonjs": "^7.24.1",
     "@babel/preset-env": "^7.24.4"
+  },
+  "browser": {
+    "crypto": false
   },
   "private": true
 }

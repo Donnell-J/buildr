@@ -11,7 +11,7 @@ import { Asset } from 'expo-asset';
 export default function ThreeScene() {
   let renderer, scene, camera, light1, light2;
   let modelMeshes = []; // Array to hold model meshes from GLTF
-  const cubes = []; // Array to hold falling cubes
+  const fallObjs = []; // Array to hold falling cubes
 
   const onContextCreate = async (gl) => {
     const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
@@ -49,49 +49,49 @@ export default function ThreeScene() {
     
 
 
-    // Create falling cubes using loaded model geometry and material
+    // Create falling objects using loaded model geometry and material
     const material = new THREE.MeshPhongMaterial({color: new THREE.Color(0xff6a14)});
     for (let i = 0; i < 7; i++) {
       // Clone a random mesh from the modelMeshes array
       const modelMesh = modelMeshes[Math.floor(Math.random() * modelMeshes.length)].clone();
       //modelMesh.geometry.scale(0.5,0.5,0.5);
-      // Create cube object
-      const cube = new THREE.Mesh(modelMesh.geometry, material);
-      cube.position.set(
+      // Create object
+      const fallObj = new THREE.Mesh(modelMesh.geometry, material);
+      fallObj.position.set(
         Math.random() * 30 - 15, // Random x position within the screen
         Math.random() * 20 - 10, // Start above the screen
         Math.random() * 2 - 5 // Random z position within the screen
       );
 
-      scene.add(cube);
-      cubes.push(cube);
+      scene.add(fallObj);
+      fallObjs.push(fallObj);
     }
 
     const animate = () => {
       requestAnimationFrame(animate);
 
-      cubes.forEach((cube) => {
-        cube.position.y -= 0.02; // Adjust falling speed
+      fallObjs.forEach((fallObj) => {
+        fallObj.position.y -= 0.02; // Adjust falling speed
 
-        // Rotate cube as it falls
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        // Rotate fallObj as it falls
+        fallObj.rotation.x += 0.01;
+        fallObj.rotation.y += 0.01;
 
-        // Reset position when cube reaches bottom
-        if (cube.position.y < -15) {
-          cube.position.set(
+        // Reset position when fallObj reaches bottom
+        if (fallObj.position.y < -15) {
+          fallObj.position.set(
             Math.random() * 30 - 15, // Random x position within the screen
             15, // Start above the screen
             Math.random() * 2 - 5 // Random z position within the screen
           );
 
-          // Randomly select a new mesh for the cube
+          // Randomly select a new mesh for the fallObj
           const newModelMesh = modelMeshes[Math.floor(Math.random() * modelMeshes.length)].clone();
-          cube.geometry = newModelMesh.geometry;
-          cube.material = material;
+          fallObj.geometry = newModelMesh.geometry;
+          fallObj.material = material;
 
           // Reset rotation
-          cube.rotation.set(0, 0, 0);
+          fallObj.rotation.set(0, 0, 0);
         }
       });
 

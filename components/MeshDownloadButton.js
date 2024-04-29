@@ -13,7 +13,7 @@ const DownloadMeshButton = ({ pcdData, setLoading, setLoadingStage }) => {
         try {
             setLoadingStage(1);
             setLoading(true);
-            const response = await fetch("http://82.2.192.225:9999/getMesh",{
+            const response = await fetch("http://backend-server-buildr.apps.a.comp-teach.qmul.ac.uk/getMesh",{
             method: 'POST',
             headers: { 'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*',

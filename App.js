@@ -55,7 +55,7 @@ export default function App() {
       try {
         setConfirmedImg(true);
         setLoading(true);
-        const resp = await fetch("http://82.2.192.225:9999/getPCD", {
+        const resp = await fetch("http://backend-server-buildr.apps.a.comp-teach.qmul.ac.uk/getPCD", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -83,12 +83,12 @@ export default function App() {
 
   return (
     <LinearGradient style={styles.page} colors = {['#25292e','#101010']}>
-      <AnimatedBackground/> {/* Include the AnimatedBackground component */}
+      <AnimatedBackground/> {/* Include the AnimatedBackground component at the top of the page so that it correctly fits the screen */}
       <View style={styles.titleBar}>
         <Text style={isMobileWeb ? styles.titleMobile : styles.title}>buildr</Text>
       </View>
       <View style={styles.contentContainer}>
-      {!confirmedImg && ( // Conditional rendering based on the loading state
+      {!confirmedImg && ( // Conditional rendering so these components are hidden if the page is currently processing a request.
         <View style={isMobileWeb ? styles.containerGreyMobile : styles.containerGrey}>
           <View style={styles.containerColumn}>
             <View style={isMobileWeb ? styles.imageContainerMobile : styles.imageContainer}>
@@ -121,7 +121,6 @@ export default function App() {
           </View>
         </View>
       ) }
-  
       <LoadModal ref = {loadModal} isVisible={loading} mode = {loadingStage} />
       <ViewDownloadModal isVisible={modelViewerVisible && !loading} pcdData={pcdData} setLoading = {setLoading} setLoadingStage ={setLoadingStage}/>
       <StatusBar style="auto" />
